@@ -35,7 +35,11 @@ from fastapi import FastAPI
 #   description = "테크 블로그 요약 서버 - 5주 커리큘럼"
 #   version     = "0.1.0"
 # --------------------------------------------------------
-app = ...
+app = FastAPI(
+    title="AIE_Khuda",
+    description="테크 블로그 요약 서버 - 5주 커리큘럼",
+    version="0.1.0"
+)
 
 
 # TODO [2] -----------------------------------------------
@@ -51,9 +55,21 @@ app = ...
 #   /docs → GET /health → Try it out → Execute
 #   → 응답 body와 상태 코드 200을 확인하세요.
 # --------------------------------------------------------
-@app.get("/health")
-def health():
-    pass  # TODO: 구현하세요
+# @app.get("/health")
+# def health():
+#    pass  # TODO: 구현하세요
+#@app.get("/health")
+#def health():
+#    return {"status": "ok"}
+@app.get("/webtoon/detail")
+def get_webtoon_detail(titleID: int):
+
+    if titleID == 641253:
+        return {
+            "titleID": 641253,
+            "title": "외모지상주의",
+            "author": "박태준"
+        }
 
 
 # TODO [3] -----------------------------------------------
@@ -76,6 +92,12 @@ def health():
 #   /docs → POST /summarize → Try it out → Request body에 임의 JSON 입력 → Execute
 #   → received 필드가 보낸 값과 동일한지 확인하세요.
 # --------------------------------------------------------
+# @app.post("/summarize", status_code=200)
+# def summarize(body: dict):
+#    pass  # TODO: 구현하세요
 @app.post("/summarize", status_code=200)
 def summarize(body: dict):
-    pass  # TODO: 구현하세요
+    return {
+        "received": body,
+        "message": "echo ok"
+    }
